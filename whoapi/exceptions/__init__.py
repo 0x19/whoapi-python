@@ -1,4 +1,6 @@
 class KeyError(Exception):
+    ''' This error is used to be raised on invalid WhoAPI key '''
+    
     message = "In order to query against WhoAPI you will need to provide valid WhoAPI key."
 
     def __init__(self, error_code=None, http_code=None):
@@ -9,6 +11,8 @@ class KeyError(Exception):
         
 
 class DomainError(Exception):
+    ''' This error is used to be raised on invalid domain '''
+
     message = "Invalid domain name provided"
 
     def __init__(self, error_code=None, http_code=None):
@@ -19,6 +23,8 @@ class DomainError(Exception):
         
 
 class RequestTypeError(Exception):
+    ''' This error is used to be raised on invalid WhoAPI request type '''
+
     message = "Invalid request type provided"
 
     def __init__(self, error_code=None, http_code=None):
@@ -29,6 +35,7 @@ class RequestTypeError(Exception):
 
 
 class ResponseError(Exception):
+    ''' This error is used to be raised on WhoAPI status code != 0 '''
 
     def __init__(self, message='', error_code=None, http_code=None):
         Exception.__init__(self, message)

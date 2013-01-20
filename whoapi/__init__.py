@@ -22,7 +22,7 @@ class WhoAPI(object):
         logging.debug("[WhoAPI.query] Is domain valid? (%s)" % is_domain_valid)
 
         if not is_domain_valid:
-            raise exceptions.DomainError('In order to query against WhoAPI you will need to provide valid WhoAPI key.')
+            raise exceptions.DomainError('In order to query against WhoAPI you will need to provide valid domain.')
 
         is_request_valid = self.is_valid_request()
 
@@ -61,7 +61,8 @@ class WhoAPI(object):
                 raise exceptions.ResponseError(json_response['status_desc'], error_code=status_code)
 
         except (KeyError, AttributeError) as e:
-            raise Exception("WhoAPI is probably down or under some heavy bug. Please contact WhoAPI support.")
+            if len(json_response) < 3: # Because status is not returned with every so we gotta count in case there are more than 2 items in object
+                    raise Exception("WhoAPI is probably down or under some heavy bug. Please contact WhoAPI support.")
 
         return json_response
 
